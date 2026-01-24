@@ -16,9 +16,7 @@ package Arrays.easy;
 //        0 <= nums1[i], nums2[i] <= 1000
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class LC_349_Intersection_Of_Two_Arrays {
     public static void main(String[] args) {
@@ -28,20 +26,22 @@ public class LC_349_Intersection_Of_Two_Arrays {
         System.out.println(Arrays.toString(output));
     }
     public static int[] intersection(int[] nums1, int[] nums2) {
-        int n1 = nums1.length;
-        int n2 = nums2.length;
-
-        int [] small = n1 > n2 ? nums2 : nums1;
-        int [] big = n1 > n2 ? nums1 : nums2;
-        List<Integer> myList = new ArrayList<>();
-        for(int i = 0; i < small.length; i++){
-            for(int j = 0; j < big.length; j++){
-                if(small[i] == big[j] && !myList.contains(small[i])){
-                    myList.add(small[i]);
-                    break;
-                }
+        Set<Integer> set1 = new HashSet<>();
+        for(int i : nums1){
+            set1.add(i);
+        }
+        Set<Integer> result = new HashSet<>();
+        for(int n : nums2){
+            if(set1.contains(n)){
+                result.add(n);
             }
         }
-        return myList.stream().mapToInt(Integer::intValue).toArray();
+        int [] common = new int [result.size()];
+        int i = 0;
+        for(int j : result){
+            common[i] = j;
+            i++;
+        }
+        return common;
     }
 }
