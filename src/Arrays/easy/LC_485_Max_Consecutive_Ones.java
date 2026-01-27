@@ -30,9 +30,7 @@ public class LC_485_Max_Consecutive_Ones {
                 count++;
                 ptr++;
             }
-            if(count > max){
-                max = count;
-            }
+            max = Math.max(max, count);
             ptr++;
         }
         System.out.println(max);
